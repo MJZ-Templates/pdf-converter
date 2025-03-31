@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PDF to Markdown Converter</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  </head>
+  <body>
+    <div class="container" x-data="pdfConverter()">
+      <!-- Upload Section -->
+      <div class="upload-panel">
+        <h2>Upload PDF File</h2>
+        <input type="file" accept=".pdf" @change="handleFileUpload" />
+        <button @click="uploadPdf">Start Conversion</button>
+      </div>
+
+      <!-- Result Section -->
+      <div class="result-panel">
+        <div class="result-header">
+          <select x-model="selectedOutputType">
+            <option value="md">Markdown</option>
+            <option value="html">HTML</option>
+          </select>
+          <button @click="downloadResult">Download</button>
+        </div>
+        <textarea x-model="convertedText" rows="20" cols="50" placeholder="Converted result will appear here."></textarea>
+      </div>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
