@@ -10,8 +10,7 @@ public class CorsConfig extends WebMvcConfigurationSupport {
      @Override
      public void addCorsMappings(CorsRegistry registry) {
          registry.addMapping("/**")
-                 .allowedOrigins("http://localhost:5500") // add your arkain domain!
-                 // for example .allowedOrigins("http://localhost:5500", "https://arkain-test")
+                 .allowedOrigins("*")
                  .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                  .allowedHeaders("*");
      }
