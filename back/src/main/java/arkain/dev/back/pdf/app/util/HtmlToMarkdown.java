@@ -5,11 +5,19 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 
 public class HtmlToMarkdown {
 
-    public static String convertHtmlToMarkdown(String html) {
+    private static final FlexmarkHtmlConverter converter;
+
+    static {
         MutableDataSet options = new MutableDataSet();
         options.set(FlexmarkHtmlConverter.SETEXT_HEADINGS, false);
-        FlexmarkHtmlConverter markdownConverter = FlexmarkHtmlConverter.builder(options)
-                .build();
-        return markdownConverter.convert(html);
+
+        converter = FlexmarkHtmlConverter.builder(options).build();
+    }
+
+    public static String convertHtmlToMarkdown(String html) {
+        if (html == null || html.trim().isEmpty()) {
+            return "";
+        }
+        return converter.convert(html).trim();
     }
 }

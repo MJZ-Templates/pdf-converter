@@ -2,12 +2,12 @@ package arkain.dev.back.pdf.app;
 
 import arkain.dev.back.common.exception.CommonException;
 import arkain.dev.back.common.exception.ErrorCode;
+import arkain.dev.back.pdf.app.util.CustomTextStripper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.io.RandomAccessReadBufferedFile;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,16 +43,14 @@ public class TextExtractService {
     private String extractText(File file) throws IOException {
         try (RandomAccessReadBufferedFile randomAccessFile = new RandomAccessReadBufferedFile(file);
              PDDocument document = Loader.loadPDF(randomAccessFile)) {
-            PDFTextStripper textStripper = new PDFTextStripper();
-            return textStripper.getText(document);
+            CustomTextStripper stripper = new CustomTextStripper();
+            stripper.getText(document); // 내부적으로 writeString 호출됨
+            return stripper.getProcessedText();
         }
     }
 
     private void deleteTempFile(File file) {
-        if (file == null || !file.exists()) {
-            return;
-        }
-        if (!file.delete()) {
+        if (file != null && file.exists() && !file.delete()) {
             log.error("Failed to delete temporary file: {}", file.getAbsolutePath());
         }
     }
