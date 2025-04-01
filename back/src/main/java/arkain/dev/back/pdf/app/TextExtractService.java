@@ -44,7 +44,7 @@ public class TextExtractService {
         try (RandomAccessReadBufferedFile randomAccessFile = new RandomAccessReadBufferedFile(file);
              PDDocument document = Loader.loadPDF(randomAccessFile)) {
             CustomTextStripper stripper = new CustomTextStripper();
-            stripper.getText(document); // 내부적으로 writeString 호출됨
+            stripper.getText(document);
             return stripper.getProcessedText();
         }
     }

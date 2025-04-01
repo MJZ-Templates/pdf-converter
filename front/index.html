@@ -12,23 +12,21 @@
       <!-- Upload Section -->
       <div class="upload-panel">
         <h2>Upload PDF File</h2>
-        <!-- 파일 이름 표시 -->
+        <!-- Display file name -->
         <template x-if="pdfFile">
           <p style="margin-top: 10px; color: #555;">
             Selected file: <strong x-text="pdfFile.name"></strong>
           </p>
         </template>
 
-        <!-- 숨겨진 파일 입력 -->
-        <input 
+        <input
           type="file" 
           id="fileInput"
           accept=".pdf" 
           @change="handleFileUpload" 
           style="display: none;"
         />
-      
-        <!-- 커스텀 버튼 -->
+
         <button onclick="document.getElementById('fileInput').click()">
           Select PDF File
         </button>

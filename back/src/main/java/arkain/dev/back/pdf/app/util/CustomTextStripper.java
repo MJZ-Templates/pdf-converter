@@ -19,18 +19,20 @@ public class CustomTextStripper extends PDFTextStripper {
     protected void writeString(String string, List<TextPosition> textPositions) {
         if (textPositions.isEmpty()) return;
 
-        float indentX = textPositions.get(0).getXDirAdj(); // 들여쓰기 기준
+        float indentX = textPositions.get(0).getXDirAdj();
         String trimmed = string.trim();
 
-        // 불릿 항목일 경우
+        // if bullet point, asterisk, hyphen, or numbered list
         if (trimmed.matches("^(•|\\*|-|\\d+\\.)\\s+.*")) {
             result.append("- ").append(trimmed.replaceFirst("^(•|\\*|-|\\d+\\.)\\s+", "")).append("\n");
         }
-        // 들여쓰기된 경우
+
+        // if indent is greater than threshold
         else if (indentX > INDENT_THRESHOLD) {
             result.append("    ").append(trimmed).append("\n");
         }
-        // 일반 문장
+
+        // append normal text
         else {
             result.append(trimmed).append("\n");
         }

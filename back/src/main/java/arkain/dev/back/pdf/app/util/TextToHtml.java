@@ -25,26 +25,26 @@ public class TextToHtml {
 
                 if (listType != null) {
                     if (!listType.equals(currentListType)) {
-                        // 이전 리스트 닫기
+                        // close the previous list if it's open
                         if (currentListType != null) {
                             bodyContent.append("</").append(currentListType).append(">\n");
                         }
-                        // 새로운 리스트 열기
+                        // open the new list
                         bodyContent.append("<").append(listType).append(">\n");
                         currentListType = listType;
                     }
 
-                    // 리스트 아이템 추가
+                    // add list item
                     String item = trimmed.replaceFirst("^(\\*|-|•|\\d+\\.)\\s+", "");
                     bodyContent.append("  <li>").append(item).append("</li>\n");
                 } else {
-                    // 리스트 아닌 줄이 나오면 현재 리스트 닫기
+                    // close the current list if it's open
                     if (currentListType != null) {
                         bodyContent.append("</").append(currentListType).append(">\n");
                         currentListType = null;
                     }
 
-                    // 들여쓰기 처리
+                    // process indent
                     if (isIndented) {
                         bodyContent.append("<blockquote>").append(trimmed).append("</blockquote>\n");
                     } else {
@@ -53,12 +53,12 @@ public class TextToHtml {
                 }
             }
 
-            // 문단이 끝났는데도 리스트가 열려 있으면 닫아줌
+            // close the current list if it's open
             if (currentListType != null) {
                 bodyContent.append("</").append(currentListType).append(">\n");
             }
 
-            bodyContent.append("\n"); // 문단 간 여백
+            bodyContent.append("\n"); // add a blank line between paragraphs
         }
 
         return """
