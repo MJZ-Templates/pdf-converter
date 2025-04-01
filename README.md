@@ -24,7 +24,3 @@ This project allows users to **upload PDF files**, **extract text**, and **downl
    cd /workspace/pdf-converter/back
    ./gradlew classes
    ```
-
-3. **Ensure CORS**
-   - Add your domain into allowedOrigins `pdf/back/.../config/CorsConfig.java`
-   
