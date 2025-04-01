@@ -3,6 +3,7 @@ A lightweight and fast PDF conversion tool built with **Spring Boot** (backend) 
 This project allows users to **upload PDF files**, **extract text**, and **download results as Markdown or HTML**, enabling efficient and structured content analysis.
 
 ### 🚀 Features
+![Preview](./images/preview.png)
 - One-click upload and conversion of PDF files
 - Supports both **Markdown (.md)** and **HTML (.html)** formats
 - Clean, intuitive UI for non-technical users
