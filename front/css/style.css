@@ -48,6 +48,13 @@ body {
   color: #333;
 }
 
+.file-name {
+  margin-top: 10px;
+  color: #4b5563; /* Tailwind의 gray-600 */
+  font-size: 14px;
+}
+
+
 /* Inputs and Buttons */
 input[type="file"] {
   margin-bottom: 20px;
